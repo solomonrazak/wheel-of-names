@@ -1,14 +1,18 @@
 import { useState } from 'react'
+import Header from './components/header'
+import Question from './features/question'
+import Participants from './features/participants'
 
 
 function App() {
-  const [count, setCount] = useState(0)
+ 
 
   return (
-    <>
-      
-       
-    </>
+    <div className="bg-black h-screen">
+      <Header />
+      <Question />
+      <Participants />
+    </div>
   )
 }
 
