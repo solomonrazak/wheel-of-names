@@ -1,20 +1,39 @@
 import React, { useState } from "react";
 
-const Participants: React.FC = (
-  ) => {
+const Participants: React.FC = () => {
   const [participant, setParticipant] = useState<string>("");
   const [names, setNames] = useState<string[]>([]);
-  
 
- const handleAddName = () => {
-    if(participant.trim() !== "" && names.length < 5){
-        setNames([...names, participant.trim()]);
-        setParticipant("");
+  const MAX_PARTICIPANTS = 5;
+
+  const handleAddName = () => {
+    if (names.length >= MAX_PARTICIPANTS) {
+      alert("You cannot have more than 5 participants");
+      return;
     }
- }
+    if (participant.trim() !== "" && names.length < MAX_PARTICIPANTS) {
+      setNames([...names, participant.trim()]);
+      setParticipant("");
+    }
+  };
 
- const handleRemoveName = (index: number) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter"){
+        handleAddName();
+    }
+
+  }
+
+  const handleRemoveName = (index: number) => {
     setNames(names.filter((_, i) => i !== index));
+  };
+
+  const shuffleNames = () => {
+    setNames((prevNames) => [...prevNames].sort(() => Math.random() - 0.5));
+  };
+
+  const sortNames = () => {
+    setNames([...names].sort((a, b) => a.localeCompare(b)));
   };
 
   return (
@@ -26,18 +45,29 @@ const Participants: React.FC = (
           placeholder="Enter participant name"
           type="text"
           onChange={(e) => setParticipant(e.target.value)}
+          onKeyDown={handleKeyDown}
           value={participant}
         />
-        <button className="py-2 px-2 font-medium rounded-md text-white bg-slate-700" onClick={handleAddName}>
+        <button
+          className="py-2 px-2 font-medium rounded-md text-white bg-slate-700"
+          onClick={handleAddName}
+          
+        >
           Add
         </button>
       </div>
       <h1 className="text-center font-medium text-white pt-3">Participants</h1>
       <div className="flex gap-2">
-        <button className="py-2 px-2 font-medium rounded-md text-white bg-slate-700">
+        <button
+          className="py-2 px-2 font-medium rounded-md text-white bg-slate-700"
+          onClick={shuffleNames}
+        >
           Shuffle
         </button>
-        <button className="py-2 px-2 font-medium rounded-md text-white bg-slate-700">
+        <button
+          className="py-2 px-2 font-medium rounded-md text-white bg-slate-700"
+          onClick={sortNames}
+        >
           Sort
         </button>
       </div>
@@ -47,7 +77,12 @@ const Participants: React.FC = (
             <div className="bg-white w-[180px] p-1 rounded-md border border-slate-900">
               <p className="text-center font-medium text-[20px]">{name}</p>
             </div>
-            <button className="py-2 px-3 font-medium rounded-md text-white bg-slate-700" onClick={() => handleRemoveName(index)}>Del</button>
+            <button
+              className="py-2 px-3 font-medium rounded-md text-white bg-slate-700"
+              onClick={() => handleRemoveName(index)}
+            >
+              Del
+            </button>
           </div>
         ))}
       </ul>
