@@ -1,19 +1,24 @@
-import { useState } from 'react'
-import Header from './components/header'
-import Question from './features/question'
-import Participants from './features/participants'
-
+import { useState } from "react";
+import Header from "./components/header";
+import Question from "./features/question";
+import Participants from "./features/participants";
+import Wheel from "./features/wheel";
 
 function App() {
- 
-
   return (
     <div className="bg-black h-screen">
       <Header />
       <Question />
-      <Participants />
+      <main className="flex px-10 mt-7">
+        <div className="w-[50%]">
+          <Participants />
+        </div>
+        <div className="w-[50%]">
+          <Wheel />
+        </div>
+      </main>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

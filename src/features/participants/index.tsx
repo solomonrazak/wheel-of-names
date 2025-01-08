@@ -18,11 +18,10 @@ const Participants: React.FC = () => {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter"){
-        handleAddName();
+    if (e.key === "Enter") {
+      handleAddName();
     }
-
-  }
+  };
 
   const handleRemoveName = (index: number) => {
     setNames(names.filter((_, i) => i !== index));
@@ -51,13 +50,12 @@ const Participants: React.FC = () => {
         <button
           className="py-2 px-2 font-medium rounded-md text-white bg-slate-700"
           onClick={handleAddName}
-          
         >
           Add
         </button>
       </div>
-      <h1 className="text-center font-medium text-white pt-3">Participants</h1>
-      <div className="flex gap-2">
+      <h1 className="text-center font-medium text-white pt-2">Participants</h1>
+      <div className="flex justify-center ml-28 gap-2 mb-2 mt-4">
         <button
           className="py-2 px-2 font-medium rounded-md text-white bg-slate-700"
           onClick={shuffleNames}
@@ -71,21 +69,23 @@ const Participants: React.FC = () => {
           Sort
         </button>
       </div>
-      <ul>
-        {names.map((name, index) => (
-          <div key={index} className="flex gap-2 mb-2">
-            <div className="bg-white w-[180px] p-1 rounded-md border border-slate-900">
-              <p className="text-center font-medium text-[20px]">{name}</p>
+      <div className="flex justify-center">
+        <ul className="">
+          {names.map((name, index) => (
+            <div key={index} className="flex gap-2 mb-2">
+              <div className="bg-white w-[180px] p-1 rounded-md border border-slate-900">
+                <p className="text-center font-medium text-[20px]">{name}</p>
+              </div>
+              <button
+                className="py-2 px-3 font-medium rounded-md text-white bg-slate-700"
+                onClick={() => handleRemoveName(index)}
+              >
+                Del
+              </button>
             </div>
-            <button
-              className="py-2 px-3 font-medium rounded-md text-white bg-slate-700"
-              onClick={() => handleRemoveName(index)}
-            >
-              Del
-            </button>
-          </div>
-        ))}
-      </ul>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
