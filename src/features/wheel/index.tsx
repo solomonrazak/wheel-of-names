@@ -1,11 +1,21 @@
 import React, { useState, useRef, useEffect } from "react";
 
 const Wheel = () => {
+  const [spinning, setSpinning] = useState(false);
+  const [rotation, setRotation] = useState(0);
+  const [spinDirection, setSpinDirection] = useState<
+    'clockwise' | 'counterclockwise'
+  >('clockwise');
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupWinner, setPopupWinner] = useState<string | null>(null);
+
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  
   // // State to track if the user is currently drawing
   // const [isDrawing, setIsDrawing] = useState(false);
 
   // // Refs to store the canvas element and its 2D drawing context
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  // const canvasRef = useRef<HTMLCanvasElement | null>(null);
   // const contextRef = useRef<CanvasRenderingContext2D | null>(null);
 
   // // Setup the canvas and context on the initial render
