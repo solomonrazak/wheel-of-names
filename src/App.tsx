@@ -10,10 +10,10 @@ function App() {
       <Header />
       <Question />
       <main className="flex px-10 mt-7">
-        <div className="w-[50%]">
+        <div className="w-1/2">
           <Participants />
         </div>
-        <div className="w-[50%]">
+        <div  className="w-1/2 h-full">
           <Wheel />
         </div>
       </main>

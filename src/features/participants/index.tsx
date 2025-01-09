@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { capitalize } from "../../utils/capitalize.ts";
 
 const Participants: React.FC = () => {
   const [participant, setParticipant] = useState<string>("");
@@ -12,7 +13,8 @@ const Participants: React.FC = () => {
       return;
     }
     if (participant.trim() !== "" && names.length < MAX_PARTICIPANTS) {
-      setNames([...names, participant.trim()]);
+      const capitalizedParticipant = capitalize(participant.trim());
+      setNames([...names, capitalizedParticipant]);
       setParticipant("");
     }
   };
