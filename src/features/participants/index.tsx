@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { capitalize } from "../../utils/capitalize.ts";
 
-const Participants: React.FC = () => {
+
+interface ParticipantsProps {
+  onUpdateParticipants: (names: string[]) => void;
+}
+
+const Participants: React.FC<ParticipantsProps> = ({onUpdateParticipants}) => {
   const [participant, setParticipant] = useState<string>("");
   const [names, setNames] = useState<string[]>([]);
 
@@ -12,9 +17,15 @@ const Participants: React.FC = () => {
       alert("You cannot have more than 5 participants");
       return;
     }
-    if (participant.trim() !== "" && names.length < MAX_PARTICIPANTS) {
-      const capitalizedParticipant = capitalize(participant.trim());
-      setNames([...names, capitalizedParticipant]);
+    // if (participant.trim() !== "" && names.length < MAX_PARTICIPANTS) {
+    //   const capitalizedParticipant = capitalize(participant.trim());
+    //   setNames([...names, capitalizedParticipant]);
+    //   setParticipant("");
+    // }
+    if (participant.trim() !== "") {
+      const newNames = [...names, participant.trim()];
+      setNames(newNames);
+      onUpdateParticipants(newNames);
       setParticipant("");
     }
   };
